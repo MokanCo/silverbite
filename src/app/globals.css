@@ -1,26 +1,212 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --color-obsidian: #090b10;
+  --color-silver: #c7cdd6;
+  --color-cyan: #00d5ff;
+  --color-titanium: #343b48;
+  --color-ice: #f4f6f8;
+  --color-bite: #176bff;
+  --color-white: #f4f6f8;
+  --color-ink: #090b10;
+  --color-navy: #343b48;
+  --color-bright: #00d5ff;
+  --color-blue: #176bff;
+  --color-snow: #f4f6f8;
+  --color-paper: #f4f6f8;
+  --color-mist: #f4f6f8;
+  --color-muted: #c7cdd6;
+  --color-dusk: #343b48;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6f8;
+  color: #090b10;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-sora), var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+}
+
+.marquee-fade {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+}
+
+.marquee-track {
+  animation: marquee 48s linear infinite;
+  will-change: transform;
+}
+
+.marquee-slow {
+  animation-duration: 68s;
+}
+
+.marquee-fade:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(199, 205, 214, 0.9);
+}
+
+.scroll-rail {
+  scrollbar-width: thin;
+  scrollbar-color: #00d5ff transparent;
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+
+.scroll-rail::-webkit-scrollbar {
+  height: 3px;
+}
+
+.scroll-rail::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-rail::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #00d5ff, #176bff);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+::selection {
+  background: #00d5ff;
+  color: #090b10;
+}
+
+:focus-visible {
+  outline: 2px solid #00d5ff;
+  outline-offset: 3px;
+}
+
+[id] {
+  scroll-margin-top: 1.25rem;
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(to right, rgba(199, 205, 214, 0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(199, 205, 214, 0.09) 1px, transparent 1px);
+  background-size: 76px 76px;
+  mask-image: radial-gradient(ellipse at center, #000 15%, transparent 74%);
+}
+
+.grain {
+  background-image: radial-gradient(rgba(244, 246, 248, 0.45) 0.55px, transparent 0.55px);
+  background-size: 3px 3px;
+}
+
+.bite-corner {
+  -webkit-mask-image: radial-gradient(
+    circle 22px at calc(100% - 2px) 2px,
+    transparent 21px,
+    #000 22px
+  );
+  mask-image: radial-gradient(circle 22px at calc(100% - 2px) 2px, transparent 21px, #000 22px);
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 80;
+  transform: translateY(-160%);
+  background: #f4f6f8;
+  color: #090b10;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+@media (min-width: 768px) {
+  .skip-link {
+    left: 8.5rem;
+  }
+}
+
+.dark-field {
+  color-scheme: dark;
+}
+
+.legal h2 {
+  margin-top: 2.75rem;
+  color: #090b10;
+  font-size: 1.65rem;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+}
+
+.legal p + p,
+.legal ul + p,
+.legal p + ul {
+  margin-top: 1rem;
+}
+
+.legal ul {
+  margin-top: 0.75rem;
+  padding-left: 1.15rem;
+  list-style: disc;
+}
+
+.legal li + li {
+  margin-top: 0.4rem;
+}
+
+@keyframes rise {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translateY(-8px);
+    opacity: 0.95;
+  }
+}
+
+.particle {
+  animation: rise 7.5s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
 }
